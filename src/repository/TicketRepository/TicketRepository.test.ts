@@ -65,6 +65,25 @@ describe('TicketRepository', () => {
     });
   });
 
+  describe('Given an externalId', () => {
+    it('should return ticket with a matching externalId', async () => {
+      const term = 'dbf801cc-2d9e-403e-9210-4c870240d270';
+
+      const result = await repo.getByExternalId(term);
+
+      expect(result).toHaveLength(1);
+      expect(result[0].externalId).toBe(term);
+    });
+
+    it('should return empty array', async () => {
+      const term = '';
+
+      const result = await repo.getByExternalId(term);
+
+      expect(result).toHaveLength(0);
+    });
+  });
+
   describe('Given a createAt', () => {
     it('should return ticket with a matching createdAt', async () => {
       const term = '2016-07-06T11:16:50 -10:00';
