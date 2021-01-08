@@ -1,0 +1,61 @@
+{
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "bin": {
+    "ss": "./dist/index.js"
+  },
+  "scripts": {
+    "dev": "nodemon --watch 'src/**/*.ts' --watch 'src/**/*.tsx' --exec 'ts-node' src/index.tsx",
+    "build": "npm run clean && tsc -p .",
+    "clean": "rimraf ./dist ./bin",
+    "test": "jest",
+    "test:watch": "jest --watchAll=true",
+    "test:coverage": "jest --collectCoverage"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm test -- --collectCoverage --watchAll=false"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "ticket-search",
+  "author": "Willwin Wang",
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.8",
+    "@testing-library/react": "^11.2.3",
+    "@types/faker": "^5.1.5",
+    "@types/jest": "^26.0.20",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-config-react": "^1.1.7",
+    "faker": "^5.1.0",
+    "husky": "^4.3.6",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.7",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.4.4",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.0.5"
+  },
+  "dependencies": {
+    "@types/lowdb": "^1.0.9",
+    "@types/node": "^14.14.20",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/uuid": "^8.3.0",
+    "ink": "^3.0.8",
+    "lowdb": "^1.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "uuid": "^8.3.2"
+  }
+}
