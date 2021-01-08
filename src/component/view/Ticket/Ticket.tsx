@@ -31,7 +31,7 @@ export const TicketView: React.FC<{ ticket: Ticket }> = ({ ticket }) => {
         <Box marginBottom={2}>
           <Text color="greenBright">TICKETS</Text>
         </Box>
-        {ticketProperties.map(ticket => (
+        {ticketProperties.map((ticket) => (
           <Box flexDirection="row" key={uuid()}>
             <Box width={width}>
               <Text color="green">{ticket[0]}</Text>

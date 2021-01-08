@@ -1,4 +1,3 @@
-
 import { render } from 'ink';
 import React, { useCallback, useEffect, useState } from 'react';
 import { TicketRepository } from './repository/TicketRepository/TicketRepository';
@@ -24,7 +23,7 @@ const App = () => {
 
   return (
     <>
-      {tickets.map(ticket => (
+      {tickets.map((ticket) => (
         <TicketView ticket={ticket} key={uuid()} />
       ))}
     </>
