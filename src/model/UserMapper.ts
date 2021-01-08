@@ -1,4 +1,4 @@
-import type { UserDto, User } from '../../model/User';
+import type { UserDto, User } from './User';
 
 export class UserMapper {
   static toDomain(raw: UserDto): User {
@@ -21,7 +21,7 @@ export class UserMapper {
       organizationId: raw.organization_id,
       tags: raw.tags,
       suspended: raw.suspended,
-      role: raw.role
-    }
+      role: raw.role,
+    };
   }
 }

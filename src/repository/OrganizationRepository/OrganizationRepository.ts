@@ -1,13 +1,13 @@
 import { ORGANIZATIONS_PATH } from '../../config';
 import Lowdb from 'lowdb';
 import FileAsync from 'lowdb/adapters/FileAsync';
-import { OrganizationMapper } from './OrganizationMapper';
+import { OrganizationMapper } from '../../model/OrganizationMapper';
 
 export class OrganizationRepository {
   private lowDb: Promise<Lowdb.LowdbAsync<any>>;
 
   private getBy = async () => {
-    return (await (await this.lowDb).read()).map(organizationRaw =>
+    return (await (await this.lowDb).read()).map((organizationRaw) =>
       OrganizationMapper.toDomain(organizationRaw)
     );
   };
@@ -18,28 +18,28 @@ export class OrganizationRepository {
 
   getById = async (id: number) => {
     return (await this.getBy())
-      .filter(organization => organization.id === id)
+      .filter((organization) => organization.id === id)
       .value();
   };
 
   getByUrl = async (url: string) => {
     return (await this.getBy())
       .filter(
-        organization => organization.url.toLowerCase() === url.toLowerCase()
+        (organization) => organization.url.toLowerCase() === url.toLowerCase()
       )
       .value();
   };
 
   getByExternalId = async (id: string) => {
     return (await this.getBy())
-      .filter(organization => organization.externalId === id)
+      .filter((organization) => organization.externalId === id)
       .value();
   };
 
   getByName = async (name: string) => {
     return (await this.getBy())
       .filter(
-        organization => organization.name.toLowerCase() === name.toLowerCase()
+        (organization) => organization.name.toLowerCase() === name.toLowerCase()
       )
       .value();
   };
@@ -47,9 +47,9 @@ export class OrganizationRepository {
   getByDomainName = async (domainName: string) => {
     return (await this.getBy())
       .filter(
-        organization =>
+        (organization) =>
           organization.domainNames
-            .map(t => t.toLowerCase())
+            .map((t) => t.toLowerCase())
             .indexOf(domainName.toLowerCase()) >= 0
       )
       .value();
@@ -57,14 +57,14 @@ export class OrganizationRepository {
 
   getByCreatedAt = async (createdAt: string) => {
     return (await this.getBy())
-      .filter(organization => organization.createdAt === createdAt)
+      .filter((organization) => organization.createdAt === createdAt)
       .value();
   };
 
   getByDetails = async (details: string) => {
     return (await this.getBy())
       .filter(
-        organization =>
+        (organization) =>
           organization.details.toLowerCase() === details.toLowerCase()
       )
       .value();
@@ -72,18 +72,17 @@ export class OrganizationRepository {
 
   getBySharedTickets = async (sharedTickets: boolean) => {
     return (await this.getBy())
-      .filter(
-        organization =>
-          organization.sharedTickets === sharedTickets
-      )
+      .filter((organization) => organization.sharedTickets === sharedTickets)
       .value();
   };
 
   getByTag = async (tag: string) => {
     return (await this.getBy())
       .filter(
-        organization =>
-          organization.tags.map(t => t.toLowerCase()).indexOf(tag.toLowerCase()) >= 0
+        (organization) =>
+          organization.tags
+            .map((t) => t.toLowerCase())
+            .indexOf(tag.toLowerCase()) >= 0
       )
       .value();
   };

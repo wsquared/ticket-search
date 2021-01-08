@@ -1,4 +1,4 @@
-import type { OrganizationDto, Organization } from '../../model/Organization';
+import type { OrganizationDto, Organization } from './Organization';
 
 export class OrganizationMapper {
   static toDomain(raw: OrganizationDto): Organization {
@@ -11,7 +11,7 @@ export class OrganizationMapper {
       createdAt: raw.created_at,
       details: raw.details,
       sharedTickets: raw.shared_tickets,
-      tags: raw.tags
-    }
+      tags: raw.tags,
+    };
   }
 }

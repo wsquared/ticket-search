@@ -10,7 +10,7 @@
     "ss": "./dist/index.js"
   },
   "scripts": {
-    "dev": "nodemon --watch 'src/**/*.ts' --watch 'src/**/*.tsx' --exec 'ts-node' src/index.tsx",
+    "dev": "nodemon -e ts,tsx --watch 'src' --exec 'ts-node' src/index.tsx",
     "build": "npm run clean && tsc -p .",
     "clean": "rimraf ./dist ./bin",
     "test": "jest",
@@ -60,5 +60,9 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "uuid": "^8.3.2"
+  },
+  "nodemonConfig": {
+    "ignore": ["src/**/*.test.*"],
+    "delay": "1000"
   }
 }

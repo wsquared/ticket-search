@@ -1,4 +1,4 @@
-import type { TicketDto, Ticket } from '../../model/Ticket';
+import type { TicketDto, Ticket } from './Ticket';
 
 export class TicketMapper {
   static toDomain(raw: TicketDto): Ticket {
@@ -18,7 +18,7 @@ export class TicketMapper {
       hasIncidents: raw.has_incidents,
       dueAt: raw.due_at,
       via: raw.via,
-      organizationId: raw.organization_id
-    }
+      organizationId: raw.organization_id,
+    };
   }
 }

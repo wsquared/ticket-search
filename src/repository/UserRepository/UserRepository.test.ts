@@ -383,5 +383,4 @@ describe('UserRepository', () => {
       expect(result).toHaveLength(0);
     });
   });
-
 });
