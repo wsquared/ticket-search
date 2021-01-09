@@ -38,7 +38,7 @@ export class OrganizationRepository {
 
   getByName = async (name: string) => {
     return (await this.getBy())
-      .filter(
+      .find(
         (organization) => organization.name.toLowerCase() === name.toLowerCase()
       )
       .value();

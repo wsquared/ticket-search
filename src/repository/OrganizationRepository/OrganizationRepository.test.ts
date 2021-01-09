@@ -61,14 +61,13 @@ describe('OrganizationRepository', () => {
 
       const result = await repo.getByName(name);
 
-      expect(result).toHaveLength(1);
-      expect(result[0].name).toBe(name);
+      expect(result.name).toBe(name);
     });
 
     it('should return no organizations', async () => {
       const name = '';
 
-      expect(await repo.getByName(name)).toHaveLength(0);
+      expect(await repo.getByName(name)).toBeUndefined();
     });
   });
 
