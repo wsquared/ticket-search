@@ -13,14 +13,13 @@ describe('OrganizationRepository', () => {
 
       const result = await repo.getById(id);
 
-      expect(result).toHaveLength(1);
-      expect(result[0].id).toBe(id);
+      expect(result.id).toBe(id);
     });
 
     it('should return no organizations', async () => {
       const id = 0;
 
-      expect(await repo.getById(id)).toHaveLength(0);
+      expect(await repo.getById(id)).toBeUndefined();
     });
   });
 
@@ -30,14 +29,13 @@ describe('OrganizationRepository', () => {
 
       const result = await repo.getByUrl(url);
 
-      expect(result).toHaveLength(1);
-      expect(result[0].url).toBe(url);
+      expect(result.url).toBe(url);
     });
 
     it('should return no organizations', async () => {
       const url = '';
 
-      expect(await repo.getByUrl(url)).toHaveLength(0);
+      expect(await repo.getByUrl(url)).toBeUndefined();
     });
   });
 
@@ -47,14 +45,13 @@ describe('OrganizationRepository', () => {
 
       const result = await repo.getByExternalId(externalId);
 
-      expect(result).toHaveLength(1);
-      expect(result[0].externalId).toBe(externalId);
+      expect(result.externalId).toBe(externalId);
     });
 
     it('should return no organizations', async () => {
       const externalId = '';
 
-      expect(await repo.getByExternalId(externalId)).toHaveLength(0);
+      expect(await repo.getByExternalId(externalId)).toBeUndefined();
     });
   });
 

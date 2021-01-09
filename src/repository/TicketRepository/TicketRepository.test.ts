@@ -13,14 +13,13 @@ describe('TicketRepository', () => {
 
       const result = await repo.getById(id);
 
-      expect(result).toHaveLength(1);
-      expect(result[0].id).toBe(id);
+      expect(result.id).toBe(id);
     });
 
     it('should return no tickets', async () => {
       const id = 'foo';
 
-      expect(await repo.getById(id)).toHaveLength(0);
+      expect(await repo.getById(id)).toBeUndefined();
     });
   });
 
@@ -52,8 +51,7 @@ describe('TicketRepository', () => {
 
       const result = await repo.getByUrl(term);
 
-      expect(result).toHaveLength(1);
-      expect(result[0].url).toBe(term);
+      expect(result.url).toBe(term);
     });
 
     it('should return empty array', async () => {
@@ -61,7 +59,7 @@ describe('TicketRepository', () => {
 
       const result = await repo.getByUrl(term);
 
-      expect(result).toHaveLength(0);
+      expect(result).toBeUndefined();
     });
   });
 
@@ -71,8 +69,7 @@ describe('TicketRepository', () => {
 
       const result = await repo.getByExternalId(term);
 
-      expect(result).toHaveLength(1);
-      expect(result[0].externalId).toBe(term);
+      expect(result.externalId).toBe(term);
     });
 
     it('should return empty array', async () => {
@@ -80,11 +77,11 @@ describe('TicketRepository', () => {
 
       const result = await repo.getByExternalId(term);
 
-      expect(result).toHaveLength(0);
+      expect(result).toBeUndefined();
     });
   });
 
-  describe('Given a createAt', () => {
+  describe('Given a createdAt', () => {
     it('should return ticket with a matching createdAt', async () => {
       const term = '2016-07-06T11:16:50 -10:00';
 

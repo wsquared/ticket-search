@@ -18,13 +18,13 @@ export class OrganizationRepository {
 
   getById = async (id: number) => {
     return (await this.getBy())
-      .filter((organization) => organization.id === id)
+      .find((organization) => organization.id === id)
       .value();
   };
 
   getByUrl = async (url: string) => {
     return (await this.getBy())
-      .filter(
+      .find(
         (organization) => organization.url.toLowerCase() === url.toLowerCase()
       )
       .value();
@@ -32,7 +32,7 @@ export class OrganizationRepository {
 
   getByExternalId = async (id: string) => {
     return (await this.getBy())
-      .filter((organization) => organization.externalId === id)
+      .find((organization) => organization.externalId === id)
       .value();
   };
 

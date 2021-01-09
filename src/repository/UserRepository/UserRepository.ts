@@ -17,19 +17,25 @@ export class UserRepository {
   }
 
   getById = async (id: number) => {
-    return (await this.getBy()).filter((user) => user.id === id).value();
+    return (await this.getBy()).find((user) => user.id === id).value();
   };
 
   getByUrl = async (url: string) => {
     return (await this.getBy())
-      .filter((user) => user.url.toLowerCase() === url.toLowerCase())
+      .find((user) => user.url.toLowerCase() === url.toLowerCase())
       .value();
   };
 
   getByExternalId = async (id: string) => {
-    return (await this.getBy())
-      .filter((user) => user.externalId === id)
-      .value();
+    return (await this.getBy()).find((user) => user.externalId === id).value();
+  };
+
+  getByEmail = async (email: string) => {
+    return (await this.getBy()).find((user) => user.email === email).value();
+  };
+
+  getByPhone = async (phone: string) => {
+    return (await this.getBy()).find((user) => user.phone === phone).value();
   };
 
   getByName = async (name: string) => {
@@ -84,14 +90,6 @@ export class UserRepository {
     return (await this.getBy())
       .filter((user) => user.lastLoginAt === lastLoginAt)
       .value();
-  };
-
-  getByEmail = async (email: string) => {
-    return (await this.getBy()).filter((user) => user.email === email).value();
-  };
-
-  getByPhone = async (phone: string) => {
-    return (await this.getBy()).filter((user) => user.phone === phone).value();
   };
 
   getBySignature = async (signature: string) => {

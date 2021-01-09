@@ -13,14 +13,13 @@ describe('UserRepository', () => {
 
       const result = await repo.getById(id);
 
-      expect(result).toHaveLength(1);
-      expect(result[0].id).toBe(id);
+      expect(result.id).toBe(id);
     });
 
     it('should return no users', async () => {
       const id = 0;
 
-      expect(await repo.getById(id)).toHaveLength(0);
+      expect(await repo.getById(id)).toBeUndefined();
     });
   });
 
@@ -30,14 +29,13 @@ describe('UserRepository', () => {
 
       const result = await repo.getByUrl(url);
 
-      expect(result).toHaveLength(1);
-      expect(result[0].url).toBe(url);
+      expect(result.url).toBe(url);
     });
 
     it('should return no users', async () => {
       const url = '';
 
-      expect(await repo.getByUrl(url)).toHaveLength(0);
+      expect(await repo.getByUrl(url)).toBeUndefined();
     });
   });
 
@@ -47,14 +45,13 @@ describe('UserRepository', () => {
 
       const result = await repo.getByExternalId(externalId);
 
-      expect(result).toHaveLength(1);
-      expect(result[0].externalId).toBe(externalId);
+      expect(result.externalId).toBe(externalId);
     });
 
     it('should return no users', async () => {
       const externalId = '';
 
-      expect(await repo.getByExternalId(externalId)).toHaveLength(0);
+      expect(await repo.getByExternalId(externalId)).toBeUndefined();
     });
   });
 
@@ -237,16 +234,15 @@ describe('UserRepository', () => {
 
       const result = await repo.getByEmail(email);
 
-      expect(result).toHaveLength(1);
-      expect(result[0].email).toBe(email);
+      expect(result.email).toBe(email);
     });
 
-    it('should returnno users', async () => {
+    it('should return no users', async () => {
       const email = '';
 
       const result = await repo.getByEmail(email);
 
-      expect(result).toHaveLength(0);
+      expect(result).toBeUndefined();
     });
   });
 
@@ -256,8 +252,7 @@ describe('UserRepository', () => {
 
       const result = await repo.getByPhone(phone);
 
-      expect(result).toHaveLength(1);
-      expect(result[0].phone).toBe(phone);
+      expect(result.phone).toBe(phone);
     });
 
     it('should return no users', async () => {
@@ -265,26 +260,7 @@ describe('UserRepository', () => {
 
       const result = await repo.getByPhone(phone);
 
-      expect(result).toHaveLength(0);
-    });
-  });
-
-  describe('Given a phone', () => {
-    it('should return users with matching phone', async () => {
-      const phone = '8955-022-065';
-
-      const result = await repo.getByPhone(phone);
-
-      expect(result).toHaveLength(1);
-      expect(result[0].phone).toBe(phone);
-    });
-
-    it('should return no users', async () => {
-      const phone = '';
-
-      const result = await repo.getByPhone(phone);
-
-      expect(result).toHaveLength(0);
+      expect(result).toBeUndefined();
     });
   });
 

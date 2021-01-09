@@ -17,7 +17,19 @@ export class TicketRepository {
   }
 
   getById = async (id: string) => {
-    return (await this.getBy()).filter((ticket) => ticket.id === id).value();
+    return (await this.getBy()).find((ticket) => ticket.id === id).value();
+  };
+
+  getByUrl = async (url: string) => {
+    return (await this.getBy())
+      .find((ticket) => ticket.url.toLowerCase() === url.toLowerCase())
+      .value();
+  };
+
+  getByExternalId = async (id: string) => {
+    return (await this.getBy())
+      .find((ticket) => ticket.externalId.toLowerCase() === id.toLowerCase())
+      .value();
   };
 
   getByDescription = async (term: string) => {
@@ -25,18 +37,6 @@ export class TicketRepository {
       .filter(
         (ticket) => ticket.description.toLowerCase() === term.toLowerCase()
       )
-      .value();
-  };
-
-  getByUrl = async (url: string) => {
-    return (await this.getBy())
-      .filter((ticket) => ticket.url.toLowerCase() === url.toLowerCase())
-      .value();
-  };
-
-  getByExternalId = async (id: string) => {
-    return (await this.getBy())
-      .filter((ticket) => ticket.externalId.toLowerCase() === id.toLowerCase())
       .value();
   };
 
