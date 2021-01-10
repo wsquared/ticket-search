@@ -6,6 +6,7 @@ import {
   TicketById,
   TicketByExternalId,
   TicketsByCreatedAt,
+  TicketsByType,
 } from '../src/component';
 import { Ticket } from '../src/model';
 
@@ -14,10 +15,17 @@ interface ticketProps {
   url?: string;
   externalId?: string;
   createdAt?: string;
+  type?: string;
 }
 
 /// Search ticket
-const ticket: React.FC<ticketProps> = ({ id, url, externalId, createdAt }) => {
+const ticket: React.FC<ticketProps> = ({
+  id,
+  url,
+  externalId,
+  createdAt,
+  type,
+}) => {
   const [ticket, setTicket] = useState<Ticket>();
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -49,6 +57,12 @@ const ticket: React.FC<ticketProps> = ({ id, url, externalId, createdAt }) => {
         setLoading={setLoading}
         setTickets={setTickets}
       />
+      <TicketsByType
+        tickets={tickets}
+        type={type}
+        setLoading={setLoading}
+        setTickets={setTickets}
+      />
     </>
   );
 };
@@ -62,6 +76,8 @@ ticket.propTypes = {
   externalId: PropTypes.string,
   /// Search tickets by created at
   createdAt: PropTypes.string,
+  /// Search tickets by type
+  type: PropTypes.string,
 };
 
 export default ticket;

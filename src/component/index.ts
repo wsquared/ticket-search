@@ -7,5 +7,6 @@ export * from './view/Spinner/Spinner';
 export * from './view/Loading/Loading';
 export * from './view/TicketByExternalId/TicketByExternalId';
 export * from './view/TicketsByCreatedAt/TicketsByCreatedAt';
+export * from './view/TicketsByType/TicketsByType';
 
 export * from './common/TicketProps';

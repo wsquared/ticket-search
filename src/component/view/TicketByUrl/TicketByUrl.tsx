@@ -8,7 +8,7 @@ interface TicketByUrlProps extends ITicketByProps {
   url?: string;
 }
 
-/// Search ticket by url
+/// Search tickets by url
 const TicketByUrl: React.FC<TicketByUrlProps> = ({
   url,
   ticket,

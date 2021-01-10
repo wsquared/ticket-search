@@ -8,7 +8,7 @@ interface TicketByExternalIdProps extends ITicketByProps {
   externalId?: string;
 }
 
-/// Search ticket by externalId
+/// Search tickets by externalId
 const TicketByExternalId: React.FC<TicketByExternalIdProps> = ({
   externalId,
   ticket,

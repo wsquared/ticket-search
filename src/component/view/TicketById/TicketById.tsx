@@ -8,7 +8,7 @@ interface TicketByIdProps extends ITicketByProps {
   id?: string;
 }
 
-/// Search ticket by id
+/// Search tickets by id
 const TicketById: React.FC<TicketByIdProps> = ({
   id,
   ticket,

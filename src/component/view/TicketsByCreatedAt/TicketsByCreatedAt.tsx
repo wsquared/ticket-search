@@ -9,7 +9,7 @@ interface TicketsByCreatedAtProps extends ITicketsByProps {
   createdAt?: string;
 }
 
-/// Search ticket by createdAt
+/// Search tickets by createdAt
 const TicketsByCreatedAt: React.FC<TicketsByCreatedAtProps> = ({
   createdAt,
   tickets,
