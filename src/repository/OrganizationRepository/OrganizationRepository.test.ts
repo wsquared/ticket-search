@@ -72,19 +72,18 @@ describe('OrganizationRepository', () => {
   });
 
   describe('Given a domain name', () => {
-    it('should return organizations with matching domain name', async () => {
+    it('should return an organization with matching domain name', async () => {
       const domainName = 'artiq.com';
 
       const result = await repo.getByDomainName(domainName);
 
-      expect(result).toHaveLength(1);
-      expect(result[0].domainNames.includes(domainName)).toBeTruthy();
+      expect(result.domainNames.includes(domainName)).toBeTruthy();
     });
 
     it('should return no organizations', async () => {
       const domainName = '';
 
-      expect(await repo.getByDomainName(domainName)).toHaveLength(0);
+      expect(await repo.getByDomainName(domainName)).toBeUndefined();
     });
   });
 

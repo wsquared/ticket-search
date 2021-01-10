@@ -3,10 +3,19 @@ import React from 'react';
 import { v4 as uuid } from 'uuid';
 import type { Organization } from '../../../model';
 
-export const OrganizationView: React.FC<{ organization: Organization }> = ({
-  organization,
-}) => {
+export const OrganizationView: React.FC<{
+  organization?: Organization;
+  term?: string;
+}> = ({ organization, term }) => {
   const width = 15;
+
+  if (!organization) {
+    return (
+      <Box>
+        <Text color="yellowBright">No organization found.</Text>
+      </Box>
+    );
+  }
 
   const organizationProperties = [
     ['Id', organization.id],
@@ -24,7 +33,9 @@ export const OrganizationView: React.FC<{ organization: Organization }> = ({
     <>
       <Box margin={2} flexDirection="column" justifyContent="flex-start">
         <Box marginBottom={2}>
-          <Text color="greenBright">ORGANIZATIONS</Text>
+          <Text color="greenBright">
+            ORGANIZATION found with the search term: {term}
+          </Text>
         </Box>
         {organizationProperties.map((ticket) => (
           <Box flexDirection="row" key={uuid()}>

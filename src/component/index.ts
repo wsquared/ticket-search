@@ -5,5 +5,7 @@ export * from './view/Spinner/Spinner';
 export * from './view/Loading/Loading';
 export * from './view/TicketsBy/TicketsBy';
 export * from './view/TicketBy/TicketBy';
+export * from './view/OrganizationBy/OrganizationBy';
 
-export * from './common/TicketProps';
+export * from './common/ITicketByProps';
+export * from './common/IOrganizationByProps';

@@ -46,7 +46,7 @@ export class OrganizationRepository {
 
   getByDomainName = async (domainName: string) => {
     return (await this.getBy())
-      .filter(
+      .find(
         (organization) =>
           organization.domainNames
             .map((t) => t.toLowerCase())

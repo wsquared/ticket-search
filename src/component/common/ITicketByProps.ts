@@ -1,4 +1,3 @@
-import { ITicketRepository } from '../../repository';
 import { Ticket } from '../../model';
 
 export interface ITicketByProps {
