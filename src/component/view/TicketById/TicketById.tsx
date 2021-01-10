@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { TicketRepository } from '../../../repository';
-import { Ticket } from '../../../model';
 import { TicketView } from '../../../component';
+import { ITicketByProps } from '../../';
 
-interface TicketByIdProps {
+interface TicketByIdProps extends ITicketByProps {
   id?: string;
-  ticket?: Ticket;
-  setTicket: (ticket: Ticket) => void;
-  setLoading: (isLoading: boolean) => void;
 }
 
 /// Search ticket by id
@@ -17,17 +14,20 @@ const TicketById: React.FC<TicketByIdProps> = ({
   ticket,
   setTicket,
   setLoading,
+  ticketRepo = new TicketRepository(),
 }) => {
   if (id === undefined) {
     return null;
   }
 
-  const ticketByUrl = useCallback(async (id: string) => {
-    const ticketRepo = new TicketRepository();
-    setLoading(true);
-    setTicket(await ticketRepo.getById(id));
-    setLoading(false);
-  }, []);
+  const ticketByUrl = useCallback(
+    async (id: string) => {
+      setLoading(true);
+      setTicket(await ticketRepo.getById(id));
+      setLoading(false);
+    },
+    [id]
+  );
 
   useEffect(() => {
     (async () => {

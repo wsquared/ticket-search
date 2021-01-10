@@ -1,14 +1,11 @@
 import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { TicketRepository } from '../../../repository';
-import { Ticket } from '../../../model';
 import { TicketView } from '../../../component';
+import { ITicketByProps } from '../../';
 
-interface TicketByUrlProps {
+interface TicketByUrlProps extends ITicketByProps {
   url?: string;
-  ticket?: Ticket;
-  setTicket: (ticket: Ticket) => void;
-  setLoading: (isLoading: boolean) => void;
 }
 
 /// Search ticket by url

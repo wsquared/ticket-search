@@ -5,3 +5,6 @@ export * from './view/User/User';
 export * from './view/Organization/Organization';
 export * from './view/Spinner/Spinner';
 export * from './view/Loading/Loading';
+export * from './view/TicketByExternalId/TicketByExternalId';
+
+export * from './common/TicketProps';
