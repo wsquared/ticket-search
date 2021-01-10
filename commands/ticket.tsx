@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Loading,
-  TicketByUrl,
-  TicketById,
-  TicketByExternalId,
-  TicketsByCreatedAt,
-  TicketsByType,
-} from '../src/component';
+import { Loading, TicketBy, TicketsBy } from '../src/component';
 import { Ticket } from '../src/model';
+import { TicketRepository } from '../src/repository';
 
 interface ticketProps {
   id?: string;
@@ -16,6 +10,17 @@ interface ticketProps {
   externalId?: string;
   createdAt?: string;
   type?: string;
+  subject?: string;
+  description?: string;
+  priority?: string;
+  status?: string;
+  submitterId?: number;
+  assigneeId?: number;
+  organizationId?: number;
+  tag?: string;
+  hasIncidents?: boolean;
+  dueAt?: string;
+  via?: string;
 }
 
 /// Search ticket
@@ -25,43 +30,137 @@ const ticket: React.FC<ticketProps> = ({
   externalId,
   createdAt,
   type,
+  subject,
+  description,
+  priority,
+  status,
+  submitterId,
+  assigneeId,
+  organizationId,
+  tag,
+  hasIncidents,
+  dueAt,
+  via,
 }) => {
   const [ticket, setTicket] = useState<Ticket>();
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const ticketRepository = new TicketRepository();
 
   return (
     <>
       <Loading isLoading={loading} />
-      <TicketByUrl
+      <TicketBy
+        term={id}
         ticket={ticket}
-        url={url}
         setLoading={setLoading}
         setTicket={setTicket}
+        getTicketBy={ticketRepository.getById}
       />
-      <TicketById
+      <TicketBy
+        term={url}
         ticket={ticket}
-        id={id}
         setLoading={setLoading}
         setTicket={setTicket}
+        getTicketBy={ticketRepository.getByUrl}
       />
-      <TicketByExternalId
+      <TicketBy
+        term={externalId}
         ticket={ticket}
-        externalId={externalId}
         setLoading={setLoading}
         setTicket={setTicket}
+        getTicketBy={ticketRepository.getByExternalId}
       />
-      <TicketsByCreatedAt
+      <TicketsBy
+        term={createdAt}
         tickets={tickets}
-        createdAt={createdAt}
         setLoading={setLoading}
         setTickets={setTickets}
+        getTicketsBy={ticketRepository.getByCreatedAt}
       />
-      <TicketsByType
+      <TicketsBy
+        term={type}
         tickets={tickets}
-        type={type}
         setLoading={setLoading}
         setTickets={setTickets}
+        getTicketsBy={ticketRepository.getByType}
+      />
+      <TicketsBy
+        term={subject}
+        tickets={tickets}
+        setLoading={setLoading}
+        setTickets={setTickets}
+        getTicketsBy={ticketRepository.getBySubject}
+      />
+      <TicketsBy
+        term={description}
+        tickets={tickets}
+        setLoading={setLoading}
+        setTickets={setTickets}
+        getTicketsBy={ticketRepository.getByDescription}
+      />
+      <TicketsBy
+        term={priority}
+        tickets={tickets}
+        setLoading={setLoading}
+        setTickets={setTickets}
+        getTicketsBy={ticketRepository.getByPriority}
+      />
+      <TicketsBy
+        term={status}
+        tickets={tickets}
+        setLoading={setLoading}
+        setTickets={setTickets}
+        getTicketsBy={ticketRepository.getByStatus}
+      />
+      <TicketsBy
+        term={submitterId}
+        tickets={tickets}
+        setLoading={setLoading}
+        setTickets={setTickets}
+        getTicketsBy={ticketRepository.getBySubmitterId}
+      />
+      <TicketsBy
+        term={assigneeId}
+        tickets={tickets}
+        setLoading={setLoading}
+        setTickets={setTickets}
+        getTicketsBy={ticketRepository.getByAssigneeId}
+      />
+      <TicketsBy
+        term={organizationId}
+        tickets={tickets}
+        setLoading={setLoading}
+        setTickets={setTickets}
+        getTicketsBy={ticketRepository.getByOrganizationId}
+      />
+      <TicketsBy
+        term={tag}
+        tickets={tickets}
+        setLoading={setLoading}
+        setTickets={setTickets}
+        getTicketsBy={ticketRepository.getByTag}
+      />
+      <TicketsBy
+        term={hasIncidents}
+        tickets={tickets}
+        setLoading={setLoading}
+        setTickets={setTickets}
+        getTicketsBy={ticketRepository.getByHasIncidents}
+      />
+      <TicketsBy
+        term={dueAt}
+        tickets={tickets}
+        setLoading={setLoading}
+        setTickets={setTickets}
+        getTicketsBy={ticketRepository.getByDueAt}
+      />
+      <TicketsBy
+        term={via}
+        tickets={tickets}
+        setLoading={setLoading}
+        setTickets={setTickets}
+        getTicketsBy={ticketRepository.getByVia}
       />
     </>
   );
@@ -78,6 +177,28 @@ ticket.propTypes = {
   createdAt: PropTypes.string,
   /// Search tickets by type
   type: PropTypes.string,
+  /// Search tickets by subject
+  subject: PropTypes.string,
+  /// Search tickets by description
+  description: PropTypes.string,
+  /// Search tickets by priority
+  priority: PropTypes.string,
+  /// Search tickets by status
+  status: PropTypes.string,
+  /// Search tickets by submitterId
+  submitterId: PropTypes.number,
+  /// Search tickets by assigneeId
+  assigneeId: PropTypes.number,
+  /// Search tickets by organizationId
+  organizationId: PropTypes.number,
+  /// Search tickets by tag
+  tag: PropTypes.string,
+  /// Search tickets by hasIncidents
+  hasIncidents: PropTypes.bool,
+  /// Search tickets by dueAt
+  dueAt: PropTypes.string,
+  /// Search tickets by via
+  via: PropTypes.string,
 };
 
 export default ticket;

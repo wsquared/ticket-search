@@ -10,6 +10,7 @@ export interface ITicketRepository {
   getByExternalId: (externalId: string) => Promise<Ticket>;
   getByCreatedAt: (createdAt: string) => Promise<Ticket[]>;
   getByType: (type: string) => Promise<Ticket[]>;
+  getBySubject: (subject: string) => Promise<Ticket[]>;
 }
 
 export class TicketRepository implements ITicketRepository {

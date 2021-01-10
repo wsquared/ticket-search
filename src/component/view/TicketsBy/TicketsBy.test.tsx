@@ -1,78 +1,82 @@
 import React, { useState } from 'react';
 import { Ticket } from '../../../model';
-import { TicketsByCreatedAt } from './TicketsByCreatedAt';
+import { TicketsBy } from './TicketsBy';
 import { render, screen, waitFor, act, cleanup } from '@testing-library/react';
+import { TicketRepository } from '../../../repository';
 
-describe('TicketsByCreatedAt', () => {
+describe('TicketsBy', () => {
   afterEach(() => {
     cleanup();
   });
 
   it('should render tickets', async () => {
-    const createdAt = '2016-07-16T12:05:12 -10:00';
+    const term = 'incident';
 
     act(() => {
-      const TestDouble: React.FC<{ createdAt: string }> = ({ createdAt }) => {
+      const TestDouble: React.FC<{ term: string }> = ({ term }) => {
         const [tickets, setTickets] = useState<Ticket[]>([]);
 
         return (
-          <TicketsByCreatedAt
-            createdAt={createdAt}
+          <TicketsBy
+            term={term}
             setTickets={setTickets}
             setLoading={() => undefined}
             tickets={tickets}
+            getTicketsBy={new TicketRepository().getByType}
           />
         );
       };
 
-      render(<TestDouble createdAt={createdAt} />);
+      render(<TestDouble term={term} />);
     });
 
     await waitFor(() => {
-      screen.getByText(createdAt);
+      screen.getAllByText(term);
     });
   });
 
   it('should not render tickets', () => {
     act(() => {
-      const TestDouble: React.FC<{ createdAt: string }> = ({ createdAt }) => {
+      const TestDouble: React.FC<{ term: string }> = ({ term }) => {
         return (
-          <TicketsByCreatedAt
-            createdAt={createdAt}
+          <TicketsBy
+            term={term}
             setTickets={() => []}
             setLoading={() => undefined}
             tickets={[]}
+            getTicketsBy={new TicketRepository().getByType}
           />
         );
       };
 
-      render(<TestDouble createdAt={' '} />);
+      render(<TestDouble term={' '} />);
     });
 
     act(() => {
-      expect(screen.queryByText('No tickets found.')).toBeDefined();
+      expect(screen.queryAllByText('No tickets found.')).toHaveLength(0);
     });
   });
 
   it('should render null', () => {
     act(() => {
-      const TestDouble: React.FC<{ createdAt?: string }> = ({ createdAt }) => {
+      const TestDouble: React.FC<{ term?: string }> = ({ term }) => {
         const [tickets, setTickets] = useState<Ticket[]>([]);
         return (
-          <TicketsByCreatedAt
-            createdAt={createdAt}
+          <TicketsBy
+            term={term}
             setTickets={setTickets}
             setLoading={() => undefined}
             tickets={tickets}
+            getTicketsBy={new TicketRepository().getByType}
           />
         );
       };
 
-      render(<TestDouble createdAt={undefined} />);
+      render(<TestDouble term={undefined} />);
     });
 
     act(() => {
-      expect(screen.queryByText('No tickets found.')).toBeNull();
+      expect(screen.queryAllByText('No tickets found.')).toHaveLength(0);
     });
   });
 });
