@@ -3,8 +3,19 @@ import React from 'react';
 import { v4 as uuid } from 'uuid';
 import type { Ticket } from '../../../model/Ticket';
 
-export const TicketView: React.FC<{ ticket: Ticket }> = ({ ticket }) => {
+export const TicketView: React.FC<{ ticket?: Ticket; term?: string }> = ({
+  ticket,
+  term,
+}) => {
   const width = 15;
+
+  if (!ticket) {
+    return (
+      <Box>
+        <Text color="yellowBright">No ticket found.</Text>
+      </Box>
+    );
+  }
 
   const ticketProperties = [
     ['Id', ticket.id],
@@ -29,7 +40,7 @@ export const TicketView: React.FC<{ ticket: Ticket }> = ({ ticket }) => {
     <>
       <Box margin={2} flexDirection="column" justifyContent="flex-start">
         <Box marginBottom={2}>
-          <Text color="greenBright">TICKETS</Text>
+          <Text color="greenBright">TICKET found with search term: {term}</Text>
         </Box>
         {ticketProperties.map((ticket) => (
           <Box flexDirection="row" key={uuid()}>

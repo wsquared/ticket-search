@@ -1,37 +1,19 @@
 {
-  // see https://www.typescriptlang.org/tsconfig to better understand tsconfigs
-  "include": ["src"],
-  "exclude": ["node_modules", "**/*.test.ts", "**/*.test.tsx"],
   "compilerOptions": {
-    "baseUrl": "src",
     "target": "es5",
-    "allowSyntheticDefaultImports": true,
-    "noFallthroughCasesInSwitch": true,
-    "isolatedModules": true,
-    "jsx": "react",
+    "lib": ["es2017", "es2015", "dom", "es6"],
     "module": "commonjs",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "sourceMap": true,
-    "rootDir": "src",
-    "outDir": "dist",
-    "allowJs": true,
-    // stricter type-checking for stronger correctness. Recommended by TS
+    "outDir": "./dist",
+    "sourceMap": false,
     "strict": true,
-    // linter checks for common issues
-    "noImplicitReturns": true,
-    "noUnusedParameters": true,
-    // use Node's module resolution algorithm, instead of the legacy TS one
-    "moduleResolution": "node",
-    // transpile JSX to React.createElement
-    // interop between ESM and CJS modules. Recommended by TS
-    "esModuleInterop": true,
-    // significant perf increase by skipping checking .d.ts files, particularly those in node_modules. Recommended by TS
-    "skipLibCheck": true,
-    // error out if import and file system have a casing mismatch. Recommended by TS
-    "forceConsistentCasingInFileNames": true,
-    // It is commonly used when type-checking separately with `tsc`
-    "noEmit": true,
-    "resolveJsonModule": true,
-    "types": ["node", "jest"]
-  }
+    "jsx": "react",
+    "esModuleInterop": true
+  },
+  "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "**/*.test.tsx",
+    "**/*.test.ts",
+    "./src/index.tsx"
+  ]
 }
