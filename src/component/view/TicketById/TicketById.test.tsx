@@ -54,4 +54,26 @@ describe('TicketById', () => {
       expect(screen.queryByText('No tickets found.')).toBeDefined();
     });
   });
+
+  it('should render null', () => {
+    act(() => {
+      const TestDouble: React.FC<{ id?: string }> = ({ id }) => {
+        const [ticket, setTicket] = useState<Ticket>();
+        return (
+          <TicketById
+            id={id}
+            setTicket={setTicket}
+            setLoading={() => undefined}
+            ticket={ticket}
+          />
+        );
+      };
+
+      render(<TestDouble id={undefined} />);
+    });
+
+    act(() => {
+      expect(screen.queryByText('No tickets found.')).toBeNull();
+    });
+  });
 });

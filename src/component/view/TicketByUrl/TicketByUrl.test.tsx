@@ -55,4 +55,26 @@ describe('TicketByUrl', () => {
       expect(screen.queryByText('No tickets found.')).toBeDefined();
     });
   });
+
+  it('should render null', () => {
+    act(() => {
+      const TestDouble: React.FC<{ url?: string }> = ({ url }) => {
+        const [ticket, setTicket] = useState<Ticket>();
+        return (
+          <TicketByUrl
+            url={url}
+            setTicket={setTicket}
+            setLoading={() => undefined}
+            ticket={ticket}
+          />
+        );
+      };
+
+      render(<TestDouble url={undefined} />);
+    });
+
+    act(() => {
+      expect(screen.queryByText('No tickets found.')).toBeNull();
+    });
+  });
 });
