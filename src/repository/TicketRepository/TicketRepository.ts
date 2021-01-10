@@ -3,10 +3,12 @@ import Lowdb from 'lowdb';
 import FileAsync from 'lowdb/adapters/FileAsync';
 import { TicketMapper } from '../../model/TicketMapper';
 import { Ticket } from '../../model';
+
 export interface ITicketRepository {
   getById: (id: string) => Promise<Ticket>;
   getByUrl: (url: string) => Promise<Ticket>;
   getByExternalId: (externalId: string) => Promise<Ticket>;
+  getByCreatedAt: (createdAt: string) => Promise<Ticket[]>;
 }
 
 export class TicketRepository implements ITicketRepository {

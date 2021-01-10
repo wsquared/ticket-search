@@ -7,3 +7,10 @@ export interface ITicketByProps {
   setLoading: (isLoading: boolean) => void;
   ticketRepo?: ITicketRepository;
 }
+
+export interface ITicketsByProps {
+  tickets: Ticket[];
+  setTickets: (tickets: Ticket[]) => void;
+  setLoading: (isLoading: boolean) => void;
+  ticketRepo?: ITicketRepository;
+}
