@@ -144,7 +144,7 @@ describe('UserRepository', () => {
 
       const result = await repo.getByVerified(verified);
 
-      expect(result).toHaveLength(47);
+      expect(result).toHaveLength(49);
       expect(result[0].verified).toBe(verified);
     });
   });
@@ -237,8 +237,16 @@ describe('UserRepository', () => {
       expect(result.email).toBe(email);
     });
 
-    it('should return no users', async () => {
+    it('should return user with empty email', async () => {
       const email = '';
+
+      const result = await repo.getByEmail(email);
+
+      expect(result.email).toBe(email);
+    });
+
+    it('should return no users', async () => {
+      const email = ' ';
 
       const result = await repo.getByEmail(email);
 

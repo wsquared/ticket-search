@@ -7,6 +7,8 @@ export * from './view/TicketsBy/TicketsBy';
 export * from './view/TicketBy/TicketBy';
 export * from './view/OrganizationBy/OrganizationBy';
 export * from './view/OrganizationsBy/OrganizationsBy';
+export * from './view/UserBy/UserBy';
 
 export * from './common/ITicketByProps';
 export * from './common/IOrganizationByProps';
+export * from './common/IUserByProps';

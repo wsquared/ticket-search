@@ -2,8 +2,19 @@ import { Text, Box } from 'ink';
 import React from 'react';
 import type { User } from '../../../model/User';
 
-export const UserView: React.FC<{ user: User }> = ({ user }) => {
+export const UserView: React.FC<{ user?: User; term?: string }> = ({
+  user,
+  term,
+}) => {
   const width = 15;
+
+  if (!user) {
+    return (
+      <Box>
+        <Text color="yellowBright">No user found.</Text>
+      </Box>
+    );
+  }
 
   const userProperties = [
     ['Id', user.id],
@@ -31,7 +42,7 @@ export const UserView: React.FC<{ user: User }> = ({ user }) => {
     <>
       <Box margin={2} flexDirection="column" justifyContent="flex-start">
         <Box marginBottom={2}>
-          <Text color="greenBright">USERS</Text>
+          <Text color="greenBright">USER found with search term: {term}</Text>
         </Box>
         {userProperties.map((user, index) => (
           <Box flexDirection="row" key={index}>
