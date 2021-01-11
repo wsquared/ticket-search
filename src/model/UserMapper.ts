@@ -10,7 +10,7 @@ export class UserMapper {
       alias: raw.alias || '',
       createdAt: raw.created_at,
       active: raw.active,
-      verified: raw.verified || false, // Assume false
+      verified: raw.verified || false, // Assume false for undefined
       shared: raw.shared,
       locale: raw.locale || '',
       timezone: raw.timezone || '',
@@ -18,7 +18,7 @@ export class UserMapper {
       email: raw.email || '',
       phone: raw.phone,
       signature: raw.signature,
-      organizationId: raw.organization_id,
+      organizationId: raw.organization_id || '',
       tags: raw.tags,
       suspended: raw.suspended,
       role: raw.role,

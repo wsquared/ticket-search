@@ -14,7 +14,7 @@ export interface UserDto {
   last_login_at: string;
   phone: string;
   signature: string;
-  organization_id: number;
+  organization_id?: number;
   tags: string[];
   suspended: boolean;
   role: string;
@@ -36,7 +36,7 @@ export interface User {
   email: string;
   phone: string;
   signature: string;
-  organizationId: number;
+  organizationId: number | string;
   tags: string[];
   suspended: boolean;
   role: string;
