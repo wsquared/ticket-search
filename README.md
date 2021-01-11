@@ -11,13 +11,47 @@
 
 > CLI for searching tickets, organizations and users
 
-## Install
+## Setup
 
 ```sh
 npm install
 ```
 
-## Usage
+## Build and Install
+
+```sh
+npm run build
+
+npm i -g
+```
+
+## Run program
+
+Display what commands are available:
+
+```sh
+ticket-search --help
+```
+
+Searching for tickets:
+
+```sh
+ticket-search ticket --help
+```
+
+Searching for organizations:
+
+```sh
+ticket-search organization --help
+```
+
+Searching for users:
+
+```sh
+ticket-search user --help
+```
+
+## Dev
 
 ```sh
 npm run dev
@@ -27,6 +61,12 @@ npm run dev
 
 ```sh
 npm test
+```
+
+## Run tests with watch
+
+```sh
+npm run test:watch
 ```
 
 ## Author
