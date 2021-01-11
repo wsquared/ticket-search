@@ -2,6 +2,7 @@ import { ORGANIZATIONS_PATH } from '../../config';
 import Lowdb from 'lowdb';
 import FileAsync from 'lowdb/adapters/FileAsync';
 import { OrganizationMapper } from '../../model/OrganizationMapper';
+import { binarySearch } from '../common/BinarySearch';
 
 export class OrganizationRepository {
   private lowDb: Promise<Lowdb.LowdbAsync<any>>;
@@ -17,9 +18,15 @@ export class OrganizationRepository {
   }
 
   getById = async (id: number) => {
-    return (await this.getBy())
-      .find((organization) => organization.id === id)
-      .value();
+    const organizations = (await this.getBy()).value();
+
+    const index = binarySearch(organizations, id);
+
+    if (index === -1) {
+      return;
+    }
+
+    return organizations[index];
   };
 
   getByUrl = async (url: string) => {

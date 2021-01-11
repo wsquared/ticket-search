@@ -1,6 +1,4 @@
-import { User } from '../../model';
-
-export const binarySearchUser = (array: User[], target: number): number => {
+export const binarySearch = (array: any[], target: number): number => {
   let left = 0;
   let right = array.length;
 

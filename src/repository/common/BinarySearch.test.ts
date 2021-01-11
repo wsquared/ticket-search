@@ -1,4 +1,4 @@
-import { binarySearchUser } from './BinarySearch';
+import { binarySearch } from './BinarySearch';
 import faker from 'faker';
 
 describe('BinarySearch', () => {
@@ -88,25 +88,25 @@ describe('BinarySearch', () => {
   ];
 
   it('should return user 1', () => {
-    const result = binarySearchUser(array, 1);
+    const result = binarySearch(array, 1);
 
     expect(result).toBe(0);
   });
 
   it('should return user 2', () => {
-    const result = binarySearchUser(array, 2);
+    const result = binarySearch(array, 2);
 
     expect(result).toBe(1);
   });
 
   it('should return user 3', () => {
-    const result = binarySearchUser(array, 3);
+    const result = binarySearch(array, 3);
 
     expect(result).toBe(2);
   });
 
   it('should return no user', () => {
-    const result = binarySearchUser(array, 4);
+    const result = binarySearch(array, 4);
 
     expect(result).toBe(-1);
   });
