@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 import { Ticket } from '../../../model';
@@ -13,14 +13,14 @@ interface TicketsByProps<T> extends ITicketByProps {
 /// Search tickets by term
 const TicketBy = <T extends unknown>({
   term,
-  ticket,
-  setTicket,
   setLoading,
   getTicketBy,
 }: TicketsByProps<T>) => {
   if (term === undefined) {
     return null;
   }
+
+  const [ticket, setTicket] = useState<Ticket>();
 
   const fetchTicket = useCallback(
     async (term: T) => {
@@ -32,10 +32,8 @@ const TicketBy = <T extends unknown>({
   );
 
   useEffect(() => {
-    (async () => {
-      fetchTicket(term);
-    })();
-  }, [fetchTicket, term]);
+    fetchTicket(term);
+  }, [term]);
 
   return (
     <>

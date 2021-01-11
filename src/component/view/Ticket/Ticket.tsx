@@ -1,6 +1,5 @@
 import { Text, Box } from 'ink';
 import React from 'react';
-import { v4 as uuid } from 'uuid';
 import type { Ticket } from '../../../model/Ticket';
 
 export const TicketView: React.FC<{ ticket?: Ticket; term?: string }> = ({
@@ -42,8 +41,8 @@ export const TicketView: React.FC<{ ticket?: Ticket; term?: string }> = ({
         <Box marginBottom={2}>
           <Text color="greenBright">TICKET found with search term: {term}</Text>
         </Box>
-        {ticketProperties.map((ticket) => (
-          <Box flexDirection="row" key={uuid()}>
+        {ticketProperties.map((ticket, index) => (
+          <Box flexDirection="row" key={index}>
             <Box width={width}>
               <Text color="green">{ticket[0]}</Text>
             </Box>

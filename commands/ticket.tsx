@@ -42,8 +42,6 @@ const ticket: React.FC<ticketProps> = ({
   dueAt,
   via,
 }) => {
-  const [ticket, setTicket] = useState<Ticket>();
-  const [tickets, setTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const ticketRepository = new TicketRepository();
 
@@ -52,114 +50,82 @@ const ticket: React.FC<ticketProps> = ({
       <Loading isLoading={loading} />
       <TicketBy
         term={id}
-        ticket={ticket}
         setLoading={setLoading}
-        setTicket={setTicket}
         getTicketBy={ticketRepository.getById}
       />
       <TicketBy
         term={url}
-        ticket={ticket}
         setLoading={setLoading}
-        setTicket={setTicket}
         getTicketBy={ticketRepository.getByUrl}
       />
       <TicketBy
         term={externalId}
-        ticket={ticket}
         setLoading={setLoading}
-        setTicket={setTicket}
         getTicketBy={ticketRepository.getByExternalId}
       />
       <TicketsBy
         term={createdAt}
-        tickets={tickets}
         setLoading={setLoading}
-        setTickets={setTickets}
         getTicketsBy={ticketRepository.getByCreatedAt}
       />
       <TicketsBy
         term={type}
-        tickets={tickets}
         setLoading={setLoading}
-        setTickets={setTickets}
         getTicketsBy={ticketRepository.getByType}
       />
       <TicketsBy
         term={subject}
-        tickets={tickets}
         setLoading={setLoading}
-        setTickets={setTickets}
         getTicketsBy={ticketRepository.getBySubject}
       />
       <TicketsBy
         term={description}
-        tickets={tickets}
         setLoading={setLoading}
-        setTickets={setTickets}
         getTicketsBy={ticketRepository.getByDescription}
       />
       <TicketsBy
         term={priority}
-        tickets={tickets}
         setLoading={setLoading}
-        setTickets={setTickets}
         getTicketsBy={ticketRepository.getByPriority}
       />
       <TicketsBy
         term={status}
-        tickets={tickets}
         setLoading={setLoading}
-        setTickets={setTickets}
         getTicketsBy={ticketRepository.getByStatus}
       />
       <TicketsBy
         term={submitterId}
-        tickets={tickets}
         setLoading={setLoading}
-        setTickets={setTickets}
         getTicketsBy={ticketRepository.getBySubmitterId}
       />
       <TicketsBy
         term={assigneeId}
-        tickets={tickets}
         setLoading={setLoading}
-        setTickets={setTickets}
         getTicketsBy={ticketRepository.getByAssigneeId}
       />
       <TicketsBy
         term={organizationId}
-        tickets={tickets}
         setLoading={setLoading}
-        setTickets={setTickets}
         getTicketsBy={ticketRepository.getByOrganizationId}
       />
       <TicketsBy
         term={tag}
-        tickets={tickets}
         setLoading={setLoading}
-        setTickets={setTickets}
         getTicketsBy={ticketRepository.getByTag}
       />
       <TicketsBy
         term={hasIncidents}
-        tickets={tickets}
         setLoading={setLoading}
-        setTickets={setTickets}
         getTicketsBy={ticketRepository.getByHasIncidents}
       />
       <TicketsBy
         term={dueAt}
-        tickets={tickets}
         setLoading={setLoading}
-        setTickets={setTickets}
         getTicketsBy={ticketRepository.getByDueAt}
       />
       <TicketsBy
         term={via}
-        tickets={tickets}
         setLoading={setLoading}
-        setTickets={setTickets}
         getTicketsBy={ticketRepository.getByVia}
       />
     </>

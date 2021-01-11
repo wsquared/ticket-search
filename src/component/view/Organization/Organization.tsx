@@ -37,8 +37,8 @@ export const OrganizationView: React.FC<{
             ORGANIZATION found with the search term: {term}
           </Text>
         </Box>
-        {organizationProperties.map((ticket) => (
-          <Box flexDirection="row" key={uuid()}>
+        {organizationProperties.map((ticket, index) => (
+          <Box flexDirection="row" key={index}>
             <Box width={width}>
               <Text color="green">{ticket[0]}</Text>
             </Box>

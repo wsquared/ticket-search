@@ -1,6 +1,5 @@
 import { Text, Box } from 'ink';
 import React from 'react';
-import { v4 as uuid } from 'uuid';
 import type { User } from '../../../model/User';
 
 export const UserView: React.FC<{ user: User }> = ({ user }) => {
@@ -34,8 +33,8 @@ export const UserView: React.FC<{ user: User }> = ({ user }) => {
         <Box marginBottom={2}>
           <Text color="greenBright">USERS</Text>
         </Box>
-        {userProperties.map((user) => (
-          <Box flexDirection="row" key={uuid()}>
+        {userProperties.map((user, index) => (
+          <Box flexDirection="row" key={index}>
             <Box width={width}>
               <Text color="green">{user[0]}</Text>
             </Box>

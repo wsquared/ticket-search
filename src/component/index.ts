@@ -6,6 +6,7 @@ export * from './view/Loading/Loading';
 export * from './view/TicketsBy/TicketsBy';
 export * from './view/TicketBy/TicketBy';
 export * from './view/OrganizationBy/OrganizationBy';
+export * from './view/OrganizationsBy/OrganizationsBy';
 
 export * from './common/ITicketByProps';
 export * from './common/IOrganizationByProps';

@@ -1,82 +1,50 @@
-import React, { useState } from 'react';
-import { Ticket } from '../../../model';
+import React from 'react';
 import { TicketsBy } from './TicketsBy';
-import { render, screen, waitFor, act, cleanup } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { TicketRepository } from '../../../repository';
 
 describe('TicketsBy', () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it('should render tickets', async () => {
     const term = 'incident';
 
-    act(() => {
-      const TestDouble: React.FC<{ term: string }> = ({ term }) => {
-        const [tickets, setTickets] = useState<Ticket[]>([]);
+    render(
+      <TicketsBy
+        term={term}
+        setLoading={() => undefined}
+        getTicketsBy={new TicketRepository().getByType}
+      />
+    );
 
-        return (
-          <TicketsBy
-            term={term}
-            setTickets={setTickets}
-            setLoading={() => undefined}
-            tickets={tickets}
-            getTicketsBy={new TicketRepository().getByType}
-          />
-        );
-      };
-
-      render(<TestDouble term={term} />);
-    });
-
-    await waitFor(() => {
-      screen.getAllByText(term);
-    });
+    await waitFor(() => screen.getAllByText(term));
   });
 
-  it('should not render tickets', () => {
-    act(() => {
-      const TestDouble: React.FC<{ term: string }> = ({ term }) => {
-        return (
-          <TicketsBy
-            term={term}
-            setTickets={() => []}
-            setLoading={() => undefined}
-            tickets={[]}
-            getTicketsBy={new TicketRepository().getByType}
-          />
-        );
-      };
+  it('should not render tickets', async () => {
+    const term = ' ';
 
-      render(<TestDouble term={' '} />);
-    });
+    render(
+      <TicketsBy
+        term={term}
+        setLoading={() => undefined}
+        getTicketsBy={jest.fn()}
+      />
+    );
 
-    act(() => {
-      expect(screen.queryAllByText('No tickets found.')).toHaveLength(0);
-    });
+    const result = await waitFor(() => screen.getByText('No ticket found.'));
+
+    expect(result).toBeDefined();
   });
 
   it('should render null', () => {
-    act(() => {
-      const TestDouble: React.FC<{ term?: string }> = ({ term }) => {
-        const [tickets, setTickets] = useState<Ticket[]>([]);
-        return (
-          <TicketsBy
-            term={term}
-            setTickets={setTickets}
-            setLoading={() => undefined}
-            tickets={tickets}
-            getTicketsBy={new TicketRepository().getByType}
-          />
-        );
-      };
+    render(
+      <TicketsBy
+        term={undefined}
+        setLoading={() => undefined}
+        getTicketsBy={jest.fn()}
+      />
+    );
 
-      render(<TestDouble term={undefined} />);
-    });
+    const result = screen.queryByText('No ticket found.');
 
-    act(() => {
-      expect(screen.queryAllByText('No tickets found.')).toHaveLength(0);
-    });
+    expect(result).toBeNull();
   });
 });

@@ -31,9 +31,7 @@ const OrganizationBy = <T extends unknown>({
   );
 
   useEffect(() => {
-    (async () => {
-      fetchOrganization(term);
-    })();
+    fetchOrganization(term);
   }, [fetchOrganization, term]);
 
   return (

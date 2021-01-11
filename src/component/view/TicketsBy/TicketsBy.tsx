@@ -1,11 +1,10 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import { v4 as uuid } from 'uuid';
 import { Ticket } from '../../../model';
 import { TicketView } from '../../../component';
-import { ITicketsByProps } from '../../';
+import { ITicketByProps } from '../../';
 
-interface TicketsByProps<T> extends ITicketsByProps {
+interface TicketsByProps<T> extends ITicketByProps {
   term?: T;
   getTicketsBy: (term: T) => Promise<Ticket[]>;
 }
@@ -13,14 +12,14 @@ interface TicketsByProps<T> extends ITicketsByProps {
 /// Search tickets by term
 const TicketsBy = <T extends unknown>({
   term,
-  tickets,
-  setTickets,
   setLoading,
   getTicketsBy,
 }: TicketsByProps<T>) => {
   if (term === undefined) {
     return null;
   }
+
+  const [tickets, setTickets] = useState<Ticket[]>([]);
 
   const fetchTickets = useCallback(
     async (term: T) => {
@@ -32,19 +31,17 @@ const TicketsBy = <T extends unknown>({
   );
 
   useEffect(() => {
-    (async () => {
-      fetchTickets(term);
-    })();
-  }, [fetchTickets, term]);
+    fetchTickets(term);
+  }, [term]);
 
-  if (tickets.length < 1) {
-    return <TicketView ticket={undefined} term={String(term)} key={uuid()} />;
+  if (!tickets || tickets.length < 1) {
+    return <TicketView ticket={undefined} term={String(term)} />;
   }
 
   return (
     <>
       {tickets.map((ticket) => (
-        <TicketView ticket={ticket} term={String(term)} key={uuid()} />
+        <TicketView ticket={ticket} term={String(term)} key={ticket.id} />
       ))}
     </>
   );
