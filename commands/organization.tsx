@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Loading, OrganizationBy, OrganizationsBy } from '../src/component';
+import {
+  Loading,
+  OrganizationBy,
+  OrganizationsBy,
+  ErrorBoundary,
+} from '../src/component';
 import { OrganizationRepository } from '../src/repository';
 
 interface organizationByProps {
@@ -32,52 +37,54 @@ const organization: React.FC<organizationByProps> = ({
 
   return (
     <>
-      <Loading isLoading={loading} />
-      <OrganizationBy
-        term={id}
-        setLoading={setLoading}
-        getOrganizationBy={organizationRepository.getById}
-      />
-      <OrganizationBy
-        term={url}
-        setLoading={setLoading}
-        getOrganizationBy={organizationRepository.getByUrl}
-      />
-      <OrganizationBy
-        term={externalId}
-        setLoading={setLoading}
-        getOrganizationBy={organizationRepository.getByExternalId}
-      />
-      <OrganizationBy
-        term={name}
-        setLoading={setLoading}
-        getOrganizationBy={organizationRepository.getByName}
-      />
-      <OrganizationBy
-        term={domainName}
-        setLoading={setLoading}
-        getOrganizationBy={organizationRepository.getByDomainName}
-      />
-      <OrganizationsBy
-        term={createdAt}
-        setLoading={setLoading}
-        getOrganizationsBy={organizationRepository.getByCreatedAt}
-      />
-      <OrganizationsBy
-        term={details}
-        setLoading={setLoading}
-        getOrganizationsBy={organizationRepository.getByDetails}
-      />
-      <OrganizationsBy
-        term={sharedTickets}
-        setLoading={setLoading}
-        getOrganizationsBy={organizationRepository.getBySharedTickets}
-      />
-      <OrganizationsBy
-        term={tag}
-        setLoading={setLoading}
-        getOrganizationsBy={organizationRepository.getByTag}
-      />
+      <ErrorBoundary>
+        <Loading isLoading={loading} />
+        <OrganizationBy
+          term={id}
+          setLoading={setLoading}
+          getOrganizationBy={organizationRepository.getById}
+        />
+        <OrganizationBy
+          term={url}
+          setLoading={setLoading}
+          getOrganizationBy={organizationRepository.getByUrl}
+        />
+        <OrganizationBy
+          term={externalId}
+          setLoading={setLoading}
+          getOrganizationBy={organizationRepository.getByExternalId}
+        />
+        <OrganizationBy
+          term={name}
+          setLoading={setLoading}
+          getOrganizationBy={organizationRepository.getByName}
+        />
+        <OrganizationBy
+          term={domainName}
+          setLoading={setLoading}
+          getOrganizationBy={organizationRepository.getByDomainName}
+        />
+        <OrganizationsBy
+          term={createdAt}
+          setLoading={setLoading}
+          getOrganizationsBy={organizationRepository.getByCreatedAt}
+        />
+        <OrganizationsBy
+          term={details}
+          setLoading={setLoading}
+          getOrganizationsBy={organizationRepository.getByDetails}
+        />
+        <OrganizationsBy
+          term={sharedTickets}
+          setLoading={setLoading}
+          getOrganizationsBy={organizationRepository.getBySharedTickets}
+        />
+        <OrganizationsBy
+          term={tag}
+          setLoading={setLoading}
+          getOrganizationsBy={organizationRepository.getByTag}
+        />
+      </ErrorBoundary>
     </>
   );
 };

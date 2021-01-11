@@ -10,6 +10,7 @@ export * from './view/OrganizationsBy/OrganizationsBy';
 export * from './view/UserBy/UserBy';
 export * from './view/UsersBy/UsersBy';
 export * from './view/NotFound/NotFound';
+export * from './view/ErrorBoundary/ErrorBoundary';
 
 export * from './common/ISearchByProps';
 export * from './common/ISearchByProps';
