@@ -18,7 +18,7 @@ describe('TicketView', () => {
   const tags = faker.lorem.words().split(' ');
   const hasIncidents = false;
   const dueAt = faker.date.future().toISOString();
-  const via = faker.lorem.word();
+  const via = faker.random.word();
   const organizationId = faker.random.number();
 
   beforeEach(() => {
