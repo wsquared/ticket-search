@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 import { Ticket } from '../../../model';
 import { TicketView } from '../../../component';
-import { ITicketByProps } from '../../';
+import { ISearchByProps } from '../../';
 
-interface TicketsByProps<T> extends ITicketByProps {
+interface TicketsByProps<T> extends ISearchByProps {
   term?: T;
   getTicketBy: (term: T) => Promise<Ticket>;
 }

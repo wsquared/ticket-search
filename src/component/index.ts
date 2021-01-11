@@ -10,6 +10,6 @@ export * from './view/OrganizationsBy/OrganizationsBy';
 export * from './view/UserBy/UserBy';
 export * from './view/UsersBy/UsersBy';
 
-export * from './common/ITicketByProps';
-export * from './common/IOrganizationByProps';
-export * from './common/IUserByProps';
+export * from './common/ISearchByProps';
+export * from './common/ISearchByProps';
+export * from './common/ISearchByProps';

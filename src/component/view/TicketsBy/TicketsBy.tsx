@@ -2,9 +2,9 @@ import React, { useEffect, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Ticket } from '../../../model';
 import { TicketView } from '../../../component';
-import { ITicketByProps } from '../../';
+import { ISearchByProps } from '../../';
 
-interface TicketsByProps<T> extends ITicketByProps {
+interface TicketsByProps<T> extends ISearchByProps {
   term?: T;
   getTicketsBy: (term: T) => Promise<Ticket[]>;
 }

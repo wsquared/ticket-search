@@ -2,9 +2,9 @@ import React, { useEffect, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { User } from '../../../model';
 import { UserView } from '../../../component';
-import { IUserByProps } from '../../';
+import { ISearchByProps } from '../../';
 
-interface UsersByProps<T> extends IUserByProps {
+interface UsersByProps<T> extends ISearchByProps {
   term?: T;
   getUsersBy: (term: T) => Promise<User[]>;
 }

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 import { User } from '../../../model';
 import { UserView } from '../../../component';
-import { IUserByProps } from '../../';
+import { ISearchByProps } from '../../';
 
-interface UserByProps<T> extends IUserByProps {
+interface UserByProps<T> extends ISearchByProps {
   term?: T;
   getUserBy: (term: T) => Promise<User>;
 }

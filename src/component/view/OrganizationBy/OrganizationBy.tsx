@@ -2,9 +2,9 @@ import React, { useEffect, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Organization } from '../../../model';
 import { OrganizationView } from '../../../component';
-import { IOrganizationByProps } from '../../';
+import { ISearchByProps } from '../../';
 
-interface OrganzationByProps<T> extends IOrganizationByProps {
+interface OrganzationByProps<T> extends ISearchByProps {
   term?: T;
   getOrganizationBy: (term: T) => Promise<Organization>;
 }
