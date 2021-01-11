@@ -23,7 +23,7 @@ interface ticketProps {
   via?: string;
 }
 
-/// Search ticket
+/// Search tickets
 const ticket: React.FC<ticketProps> = ({
   id,
   url,

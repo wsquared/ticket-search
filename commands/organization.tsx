@@ -15,7 +15,7 @@ interface organizationByProps {
   tag?: string;
 }
 
-/// Search organization
+/// Search organizations
 const organization: React.FC<organizationByProps> = ({
   id,
   url,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Loading, UserBy } from '../src/component';
+import { Loading, UserBy, UsersBy } from '../src/component';
 import { UserRepository } from '../src/repository';
 
 interface organizationByProps {
@@ -25,7 +25,7 @@ interface organizationByProps {
   role?: string;
 }
 
-/// Search user
+/// Search users
 const organization: React.FC<organizationByProps> = ({
   id,
   url,
@@ -48,7 +48,7 @@ const organization: React.FC<organizationByProps> = ({
   role,
 }) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const organizationRepository = new UserRepository();
+  const userRepository = new UserRepository();
 
   return (
     <>
@@ -56,27 +56,97 @@ const organization: React.FC<organizationByProps> = ({
       <UserBy
         term={id}
         setLoading={setLoading}
-        getUserBy={organizationRepository.getById}
+        getUserBy={userRepository.getById}
       />
       <UserBy
         term={url}
         setLoading={setLoading}
-        getUserBy={organizationRepository.getByUrl}
+        getUserBy={userRepository.getByUrl}
       />
       <UserBy
         term={externalId}
         setLoading={setLoading}
-        getUserBy={organizationRepository.getByExternalId}
+        getUserBy={userRepository.getByExternalId}
       />
       <UserBy
         term={email}
         setLoading={setLoading}
-        getUserBy={organizationRepository.getByEmail}
+        getUserBy={userRepository.getByEmail}
       />
       <UserBy
         term={phone}
         setLoading={setLoading}
-        getUserBy={organizationRepository.getByPhone}
+        getUserBy={userRepository.getByPhone}
+      />
+      <UsersBy
+        term={name}
+        setLoading={setLoading}
+        getUsersBy={userRepository.getByName}
+      />
+      <UsersBy
+        term={alias}
+        setLoading={setLoading}
+        getUsersBy={userRepository.getByAlias}
+      />
+      <UsersBy
+        term={createdAt}
+        setLoading={setLoading}
+        getUsersBy={userRepository.getByCreatedAt}
+      />
+      <UsersBy
+        term={active}
+        setLoading={setLoading}
+        getUsersBy={userRepository.getByActive}
+      />
+      <UsersBy
+        term={verified}
+        setLoading={setLoading}
+        getUsersBy={userRepository.getByVerified}
+      />
+      <UsersBy
+        term={shared}
+        setLoading={setLoading}
+        getUsersBy={userRepository.getByShared}
+      />
+      <UsersBy
+        term={locale}
+        setLoading={setLoading}
+        getUsersBy={userRepository.getByLocale}
+      />
+      <UsersBy
+        term={timezone}
+        setLoading={setLoading}
+        getUsersBy={userRepository.getByTimezone}
+      />
+      <UsersBy
+        term={lastLoginAt}
+        setLoading={setLoading}
+        getUsersBy={userRepository.getByLastLoginAt}
+      />
+      <UsersBy
+        term={signature}
+        setLoading={setLoading}
+        getUsersBy={userRepository.getBySignature}
+      />
+      <UsersBy
+        term={organizationId}
+        setLoading={setLoading}
+        getUsersBy={userRepository.getByOrganizationId}
+      />
+      <UsersBy
+        term={tag}
+        setLoading={setLoading}
+        getUsersBy={userRepository.getByTag}
+      />
+      <UsersBy
+        term={suspended}
+        setLoading={setLoading}
+        getUsersBy={userRepository.getBySuspended}
+      />
+      <UsersBy
+        term={role}
+        setLoading={setLoading}
+        getUsersBy={userRepository.getByRole}
       />
     </>
   );
