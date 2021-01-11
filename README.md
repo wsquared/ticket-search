@@ -11,6 +11,19 @@
 
 > CLI for searching tickets, organizations and users
 
+## Preface
+
+### Assumption and constraints
+
+- User id is unique and ordered (Performance optimised using binary search)
+- Organization id is unique and ordered (Performance optimised using binary search)
+- User without verified set is assumed to be false
+
+### Known problems (can be fixed at a later date)
+
+- Ticket may not have an oganizationId, currently if ticket does not have organizationId, you can't find that.
+
+
 ## Setup
 
 ```sh
