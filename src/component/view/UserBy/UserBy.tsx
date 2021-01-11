@@ -1,10 +1,11 @@
 import React, { useEffect, useCallback, useState } from 'react';
+import { Box, Text } from 'ink';
 import PropTypes from 'prop-types';
-import { v4 as uuid } from 'uuid';
-import { User } from '../../../model';
-import { UserView } from '../../../component';
+import { Organization, User } from '../../../model';
+import { UserView, OrganizationView } from '../../../component';
 import { ISearchByProps } from '../../';
 import { NotFound } from '../NotFound/NotFound';
+import { OrganizationRepository } from '../../../repository';
 
 interface UserByProps<T> extends ISearchByProps {
   term?: T;
@@ -22,11 +23,22 @@ const UserBy = <T extends unknown>({
   }
 
   const [user, setUser] = useState<User>();
+  const [organization, setOrganization] = useState<Organization>();
 
   const fetchTicket = useCallback(
     async (term: T) => {
       setLoading(true);
-      setUser(await getUserBy(term));
+      const tempUser = await getUserBy(term);
+
+      if (tempUser && tempUser.organizationId) {
+        setOrganization(
+          await new OrganizationRepository().getById(
+            tempUser.organizationId as number
+          )
+        );
+      }
+
+      setUser(tempUser);
       setLoading(false);
     },
     [term]
@@ -40,7 +52,22 @@ const UserBy = <T extends unknown>({
     return <NotFound item={'user'} />;
   }
 
-  return <UserView user={user} />;
+  return (
+    <>
+      <Box marginLeft={2}>
+        <Text color="blue">USER found with search term: {term}</Text>
+      </Box>
+      <UserView user={user} />
+      {organization ? (
+        <>
+          <Box marginLeft={2}>
+            <Text color="yellow">Organization</Text>
+          </Box>
+          <OrganizationView organization={organization} />
+        </>
+      ) : null}
+    </>
+  );
 };
 
 UserBy.propTypes = {

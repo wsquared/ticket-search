@@ -1,9 +1,11 @@
 import React, { useEffect, useCallback, useState } from 'react';
+import { Box, Text } from 'ink';
 import PropTypes from 'prop-types';
-import { User } from '../../../model';
-import { UserView } from '../../../component';
+import { User, Organization } from '../../../model';
+import { UserView, OrganizationView } from '../../../component';
 import { ISearchByProps } from '../../';
 import { NotFound } from '../NotFound/NotFound';
+import { OrganizationRepository } from '../../../repository';
 
 interface UsersByProps<T> extends ISearchByProps {
   term?: T;
@@ -21,11 +23,33 @@ const UsersBy = <T extends unknown>({
   }
 
   const [users, setUsers] = useState<User[]>([]);
+  const [organizationsMap, setOrganizationsMap] = useState<
+    Map<number, Organization>
+  >(new Map());
 
   const fetchTickets = useCallback(
     async (term: T) => {
       setLoading(true);
-      setUsers(await getUsersBy(term));
+      const tempUsers = await getUsersBy(term);
+
+      if (tempUsers && tempUsers.length > 0) {
+        const organizationRepository = new OrganizationRepository();
+
+        await Promise.all(
+          tempUsers.map(async (user) => {
+            organizationsMap.set(
+              user.id,
+              await organizationRepository.getById(
+                user.organizationId as number
+              )
+            );
+          })
+        );
+
+        setOrganizationsMap(organizationsMap);
+      }
+
+      setUsers(tempUsers);
       setLoading(false);
     },
     [term]
@@ -42,7 +66,22 @@ const UsersBy = <T extends unknown>({
   return (
     <>
       {users.map((user) => (
-        <UserView user={user} key={user.id} />
+        <Box key={user.id} flexDirection="column">
+          <Box marginLeft={2}>
+            <Text color="blue">USER found with search term: {term}</Text>
+          </Box>
+          <UserView user={user} key={user.id} />
+          {organizationsMap.get(user.id) ? (
+            <>
+              <Box marginLeft={2}>
+                <Text color="yellow">Organization</Text>
+              </Box>
+              <OrganizationView
+                organization={organizationsMap.get(user.id) as Organization}
+              />
+            </>
+          ) : null}
+        </Box>
       ))}
     </>
   );
