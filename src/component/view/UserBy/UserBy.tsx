@@ -4,6 +4,7 @@ import { v4 as uuid } from 'uuid';
 import { User } from '../../../model';
 import { UserView } from '../../../component';
 import { ISearchByProps } from '../../';
+import { NotFound } from '../NotFound/NotFound';
 
 interface UserByProps<T> extends ISearchByProps {
   term?: T;
@@ -35,11 +36,11 @@ const UserBy = <T extends unknown>({
     fetchTicket(term);
   }, [term]);
 
-  return (
-    <>
-      <UserView user={user} term={String(term)} key={uuid()} />
-    </>
-  );
+  if (!user) {
+    return <NotFound item={'user'} />;
+  }
+
+  return <UserView user={user} />;
 };
 
 UserBy.propTypes = {

@@ -1,8 +1,10 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Text, Box } from 'ink';
 import { Organization } from '../../../model';
 import { OrganizationView } from '../../../component';
 import { ISearchByProps } from '../../';
+import { NotFound } from '../NotFound/NotFound';
 
 interface OrganzationByProps<T> extends ISearchByProps {
   term?: T;
@@ -34,9 +36,16 @@ const OrganizationBy = <T extends unknown>({
     fetchOrganization(term);
   }, [fetchOrganization, term]);
 
+  if (!organization) {
+    return <NotFound item={'organization'} />;
+  }
+
   return (
     <>
-      <OrganizationView organization={organization} term={String(term)} />
+      <Box marginLeft={2}>
+        <Text color="blue">ORGANIZATION found with search term: {term}</Text>
+      </Box>
+      <OrganizationView organization={organization} />
     </>
   );
 };

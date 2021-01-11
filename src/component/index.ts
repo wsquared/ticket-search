@@ -9,6 +9,7 @@ export * from './view/OrganizationBy/OrganizationBy';
 export * from './view/OrganizationsBy/OrganizationsBy';
 export * from './view/UserBy/UserBy';
 export * from './view/UsersBy/UsersBy';
+export * from './view/NotFound/NotFound';
 
 export * from './common/ISearchByProps';
 export * from './common/ISearchByProps';

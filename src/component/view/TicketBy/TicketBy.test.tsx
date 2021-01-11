@@ -15,9 +15,7 @@ describe('TicketBy', () => {
       />
     );
 
-    const result = await waitFor(() => screen.getByText(term));
-
-    expect(result).toBeDefined();
+    await waitFor(() => screen.getByText(term));
   });
 
   it('should not render ticket', () => {

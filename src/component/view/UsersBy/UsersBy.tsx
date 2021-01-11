@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { User } from '../../../model';
 import { UserView } from '../../../component';
 import { ISearchByProps } from '../../';
+import { NotFound } from '../NotFound/NotFound';
 
 interface UsersByProps<T> extends ISearchByProps {
   term?: T;
@@ -35,13 +36,13 @@ const UsersBy = <T extends unknown>({
   }, [term]);
 
   if (!users || users.length < 1) {
-    return <UserView user={undefined} term={String(term)} />;
+    return <NotFound item={'user'} />;
   }
 
   return (
     <>
       {users.map((user) => (
-        <UserView user={user} term={String(term)} key={user.id} />
+        <UserView user={user} key={user.id} />
       ))}
     </>
   );

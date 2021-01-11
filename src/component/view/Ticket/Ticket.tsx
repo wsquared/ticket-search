@@ -1,20 +1,9 @@
-import { Text, Box } from 'ink';
 import React from 'react';
+import { Text, Box } from 'ink';
 import type { Ticket } from '../../../model/Ticket';
 
-export const TicketView: React.FC<{ ticket?: Ticket; term?: string }> = ({
-  ticket,
-  term,
-}) => {
+export const TicketView: React.FC<{ ticket: Ticket }> = ({ ticket }) => {
   const width = 15;
-
-  if (!ticket) {
-    return (
-      <Box>
-        <Text color="yellowBright">No ticket found.</Text>
-      </Box>
-    );
-  }
 
   const ticketProperties = [
     ['Id', ticket.id],
@@ -38,9 +27,6 @@ export const TicketView: React.FC<{ ticket?: Ticket; term?: string }> = ({
   return (
     <>
       <Box margin={2} flexDirection="column" justifyContent="flex-start">
-        <Box marginBottom={2}>
-          <Text color="greenBright">TICKET found with search term: {term}</Text>
-        </Box>
         {ticketProperties.map((ticket, index) => (
           <Box flexDirection="row" key={index}>
             <Box width={width}>
