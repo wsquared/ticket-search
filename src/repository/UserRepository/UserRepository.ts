@@ -2,6 +2,7 @@ import { USERS_PATH } from '../../config';
 import Lowdb from 'lowdb';
 import FileAsync from 'lowdb/adapters/FileAsync';
 import { UserMapper } from '../../model/UserMapper';
+import { binarySearchUser } from '../common/BinarySearch';
 
 export class UserRepository {
   private lowDb: Promise<Lowdb.LowdbAsync<any>>;
@@ -17,7 +18,15 @@ export class UserRepository {
   }
 
   getById = async (id: number) => {
-    return (await this.getBy()).find((user) => user.id === id).value();
+    const users = (await this.getBy()).value();
+
+    const index = binarySearchUser(users, id);
+
+    if (index === -1) {
+      return;
+    }
+
+    return users[index];
   };
 
   getByUrl = async (url: string) => {
